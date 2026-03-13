@@ -1,52 +1,34 @@
-import java.util.Stack;
-
-/*
- * ===============================================================
- * MAIN CLASS - UseCase5PalindromeCheckerApp
- * ===============================================================
- * Use Case 5: Stack Based Palindrome Checker
- *
- * Description:
- * This class validates a palindrome using a Stack
- * data structure which follows the LIFO principle.
- *
- * Application Flow:
- * 1. Push characters into a stack
- * 2. Pop them in reverse order
- * 3. Compare with original sequence
- * 4. Display the result
- * ===============================================================
- */
+import java.util.Deque;
+import java.util.LinkedList;
+import java.util.Scanner;
 
 public class PalindroneCheckerApp {
 
-    /*
-     * Application entry point for UC5
-     */
     public static void main(String[] args) {
 
-        // Declare and initialize the input string
-        String input = "noon";
+        // Define the input string
+        Scanner sc = new Scanner(System.in);
+        System.out.print("Enter a string: ");
+        String input = sc.nextLine().toLowerCase();
 
-        // Create a Stack to store characters
-        Stack<Character> stack = new Stack<>();
+        // Create a Deque to store characters
+        Deque<Character> deque = new LinkedList<>();
 
-        // Push each character of the string into the stack
+        // Add each character to the deque
         for (char c : input.toCharArray()) {
-            stack.push(c);
+            deque.addLast(c);
         }
 
-        // Assume it is a palindrome initially
+        // Flag to track palindrome result
         boolean isPalindrome = true;
 
-        // Iterate again through original string
-        for (char c : input.toCharArray()) {
+        // Continue comparison while more than one element exists
+        while (deque.size() > 1) {
 
-            // Pop character from stack
-            char popped = stack.pop();
+            char front = deque.removeFirst();
+            char rear = deque.removeLast();
 
-            // Compare characters
-            if (c != popped) {
+            if (front != rear) {
                 isPalindrome = false;
                 break;
             }
@@ -54,9 +36,11 @@ public class PalindroneCheckerApp {
 
         // Print result
         if (isPalindrome) {
-            System.out.println(input + " is a Palindrome.");
+            System.out.println("Result: The string is a Palindrome.");
         } else {
-            System.out.println(input + " is NOT a Palindrome.");
+            System.out.println("Result: The string is NOT a Palindrome.");
         }
+
+        sc.close();
     }
 }
