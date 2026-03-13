@@ -1,62 +1,62 @@
-/**
- * ================================================================
- * MAIN CLASS - PalindroneCheckerApp
- * ================================================================
- *
- * Use Case 2: Palindrone Checking Functionality
+import java.util.Stack;
+
+/*
+ * ===============================================================
+ * MAIN CLASS - UseCase5PalindromeCheckerApp
+ * ===============================================================
+ * Use Case 5: Stack Based Palindrome Checker
  *
  * Description:
- * This class represents the entry point of the
- * Palindrome Checker Management System.
+ * This class validates a palindrome using a Stack
+ * data structure which follows the LIFO principle.
  *
- * The application:
- * - Displays a welcome message
- * - Accepts user input
- * - Checks whether the input is a palindrome
- * - Displays the result
- *
- * @author bhavyasree
- * @version 2.0
+ * Application Flow:
+ * 1. Push characters into a stack
+ * 2. Pop them in reverse order
+ * 3. Compare with original sequence
+ * 4. Display the result
+ * ===============================================================
  */
-
-import java.util.Scanner;
 
 public class PalindroneCheckerApp {
 
-    /**
-     * Application entry point.
-     *
-     * @param args Command-line arguments
+    /*
+     * Application entry point for UC5
      */
     public static void main(String[] args) {
 
-        System.out.println("===============================================");
-        System.out.println(" Welcome to Palindroe Checker App ");
-        System.out.println(" Version: 2.0");
-        System.out.println("===============================================");
+        // Declare and initialize the input string
+        String input = "noon";
 
-        Scanner scanner = new Scanner(System.in);
+        // Create a Stack to store characters
+        Stack<Character> stack = new Stack<>();
 
-        System.out.print("Enter a word or sentence: ");
-        String input = scanner.nextLine();
-
-        // Remove spaces and convert to lowercase
-        String cleanedInput = input.replaceAll("\\s+", "").toLowerCase();
-
-        // Reverse the string
-        String reversed = new StringBuilder(cleanedInput).reverse().toString();
-
-        // Check if palindrome
-        if (cleanedInput.equals(reversed)) {
-            System.out.println("Result: It is a Palindrome!");
-        } else {
-            System.out.println("Result: It is NOT a Palindrome.");
+        // Push each character of the string into the stack
+        for (char c : input.toCharArray()) {
+            stack.push(c);
         }
 
-        scanner.close();
+        // Assume it is a palindrome initially
+        boolean isPalindrome = true;
 
-        System.out.println("===============================================");
-        System.out.println(" Application Closed ");
-        System.out.println("===============================================");
+        // Iterate again through original string
+        for (char c : input.toCharArray()) {
+
+            // Pop character from stack
+            char popped = stack.pop();
+
+            // Compare characters
+            if (c != popped) {
+                isPalindrome = false;
+                break;
+            }
+        }
+
+        // Print result
+        if (isPalindrome) {
+            System.out.println(input + " is a Palindrome.");
+        } else {
+            System.out.println(input + " is NOT a Palindrome.");
+        }
     }
 }
